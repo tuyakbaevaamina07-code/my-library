@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека | Контакты</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Онлайн-библиотека</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Привет, {{ user.username }}!</span>
+                    <a href="/accounts/logout/" style="color: #F7F4D5; margin-left: 1rem;">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/" style="color: #F7F4D5;">Войти</a>
+                    <a href="/register/" style="color: #F7F4D5; margin-left: 1rem;">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+                <li><a href="/about/">О проекте</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Свяжитесь с нами</h2>
+            <p>Мы всегда рады помочь! Вы можете задать любой вопрос по работе библиотеки или предложить книгу для добавления в каталог.</p>
+            
+            <div style="margin: 2rem 0; padding: 1.5rem; background: #F7F4D5; border-radius: 24px;">
+                <h3 style="margin-top: 0;">Наши контакты</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.8rem;">📧 <strong>Email:</strong> cmda_library@gmail.com</li>
+                    <li style="margin-bottom: 0.8rem;">📞 <strong>Телефон:</strong> +7 (702) 862-02-62</li>
+                    <li style="margin-bottom: 0.8rem;">📍 <strong>Адрес:</strong> ALMATY город, AlmaU</li>
+                    <li style="margin-bottom: 0.8rem;">🕒 <strong>Часы работы:</strong> Пн-Пт: 10:00–12:00, Сб: 11:00–11:30</li>
+                </ul>
+            </div>
+
+            <h3>Напишите нам</h3>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <label for="name">Ваше имя:</label>
+                <input type="text" id="name" name="name" placeholder="айым мынбай" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="legendacmda@example.com" required>
+
+                <label for="subject">Тема сообщения:</label>
+                <input type="text" id="subject" name="subject" placeholder="Вопрос о книге">
+
+                <label for="message">Сообщение:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Напишите ваш вопрос здесь..." required></textarea>
+
+                <button type="submit" class="btn">Отправить сообщение</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

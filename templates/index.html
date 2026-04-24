@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека | Главная</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">📖 Библиотека</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/catalog/">Каталог</a></li>
+                    <li><a href="/about/">О проекте</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="user-links">
+                {% if user.is_authenticated %}
+                    <span>{{ user.username }}</span>
+                    <a href="/accounts/logout/">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/">Войти</a>
+                    <a href="/register/">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h2>Книги, <span class="accent">которые меняют</span> всё</h2>
+            <p>Тысячи историй. Одна библиотека. Выбери свою следующую книгу прямо сейчас.</p>
+            <a href="/catalog/" class="btn">Весь каталог →</a>
+        </div>
+
+        <section>
+            <h2>📖 Последние новинки</h2>
+            <div class="recent-books-list">
+                {% for book in recent_books %}
+                <div class="recent-book-item">
+                    <div>
+                        <strong>{{ book.title }}</strong>
+                        <span class="author">{{ book.author }}</span>
+                    </div>
+                    <a href="/book/{{ book.id }}/" class="btn btn-outline" style="padding: 0.3rem 1rem;">→</a>
+                </div>
+                {% empty %}
+                <p style="color: #5a6b5a;">Пока нет книг</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Главная</a>
+            <a href="/catalog/">Каталог</a>
+            <a href="/about/">О проекте</a>
+            <a href="/contacts/">Контакты</a>
+        </div>
+        <div class="footer-copy">Книги — это свобода</div>
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

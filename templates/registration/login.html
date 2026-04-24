@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в библиотеку</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #0A3323;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #839958;
+            box-shadow: 0 0 0 2px rgba(131,153,88,0.2);
+        }
+        .btn-submit {
+            background: #0A3323;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover {
+            background: #105666;
+            transform: scale(1.02);
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .error-message {
+            background: #D3968C;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Онлайн-библиотека</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Привет, {{ user.username }}!</span>
+                    <a href="/accounts/logout/" style="color: #F7F4D5; margin-left: 1rem;">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/" style="color: #F7F4D5;">Войти</a>
+                    <a href="/register/" style="color: #F7F4D5; margin-left: 1rem;">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="max-width: 500px; margin: 0 auto;">
+            <h2 style="text-align: center;">🔐 Вход в систему</h2>
+            
+            {% if form.errors %}
+            <div class="error-message">
+                Неправильный логин или пароль. Попробуйте снова.
+            </div>
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">👤 Логин</label>
+                    <input type="text" name="username" id="id_username" required placeholder="Введите ваш логин">
+                </div>
+                <div class="form-group">
+                    <label for="id_password">🔒 Пароль</label>
+                    <input type="password" name="password" id="id_password" required placeholder="Введите пароль">
+                </div>
+                <button type="submit" class="btn-submit">Войти</button>
+            </form>
+            <div class="register-link">
+                <p>Нет аккаунта? <a href="/register/" style="color: #839958; font-weight: 600;">Зарегистрироваться</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+</body>
+</html>

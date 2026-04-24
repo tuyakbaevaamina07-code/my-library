@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация в библиотеке</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #0A3323;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #839958;
+            box-shadow: 0 0 0 2px rgba(131,153,88,0.2);
+        }
+        .help-text {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        .errorlist {
+            color: #D3968C;
+            font-size: 0.8rem;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0.5rem;
+        }
+        .btn-submit {
+            background: #0A3323;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover {
+            background: #105666;
+            transform: scale(1.02);
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Онлайн-библиотека</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Привет, {{ user.username }}!</span>
+                    <a href="/accounts/logout/" style="color: #F7F4D5; margin-left: 1rem;">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/" style="color: #F7F4D5;">Войти</a>
+                    <a href="/register/" style="color: #F7F4D5; margin-left: 1rem;">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="max-width: 500px; margin: 0 auto;">
+            <h2 style="text-align: center;">📝 Создать аккаунт</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_username">👤 Логин</label>
+                    <input type="text" name="username" id="id_username" required placeholder="Придумайте логин">
+                    <div class="help-text">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password1">🔒 Пароль</label>
+                    <input type="password" name="password1" id="id_password1" required placeholder="Придумайте пароль">
+                    <div class="help-text">
+                        • Пароль не должен быть слишком похож на другую вашу личную информацию.<br>
+                        • Пароль должен содержать не менее 8 символов.<br>
+                        • Пароль не может быть слишком простым и распространённым.<br>
+                        • Пароль не может состоять только из цифр.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password2">🔒 Подтверждение пароля</label>
+                    <input type="password" name="password2" id="id_password2" required placeholder="Повторите пароль">
+                    <div class="help-text">Введите тот же пароль, что и выше, для подтверждения.</div>
+                </div>
+
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </form>
+            <div class="login-link">
+                <p>Уже есть аккаунт? <a href="/accounts/login/" style="color: #839958; font-weight: 600;">Войти</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+</body>
+</html>

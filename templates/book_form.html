@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека | {{ title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #0A3323;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #839958;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Онлайн-библиотека</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Привет, {{ user.username }}!</span>
+                    <a href="/accounts/logout/" style="color: #F7F4D5; margin-left: 1rem;">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/" style="color: #F7F4D5;">Войти</a>
+                    <a href="/register/" style="color: #F7F4D5; margin-left: 1rem;">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+                <li><a href="/about/">О проекте</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="max-width: 800px; margin: 0 auto;">
+            <h2>{{ title }}</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_title">Название книги</label>
+                    <input type="text" name="title" id="id_title" value="{{ form.title.value|default:'' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_author">Автор</label>
+                    <input type="text" name="author" id="id_author" value="{{ form.author.value|default:'' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_description">Описание</label>
+                    <textarea name="description" id="id_description" rows="5" required>{{ form.description.value|default:'' }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_year">Год издания</label>
+                    <input type="number" name="year" id="id_year" value="{{ form.year.value|default:'' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_genre">Жанр</label>
+                    <input type="text" name="genre" id="id_genre" value="{{ form.genre.value|default:'' }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_available">
+                        <input type="checkbox" name="available" id="id_available" {% if form.available.value %}checked{% endif %}>
+                        В наличии
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn" style="background: #839958;">Сохранить</button>
+                <a href="/catalog/" class="btn" style="background: #D3968C;">Отмена</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+</body>
+</html>

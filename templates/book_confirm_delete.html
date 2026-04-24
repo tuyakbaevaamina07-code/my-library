@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление книги</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Онлайн-библиотека</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+                <li><a href="/about/">О проекте</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Удалить книгу?</h2>
+            <p>Вы уверены, что хотите удалить книгу <strong>{{ book.title }}</strong> ({{ book.author }})?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background: #D3968C;">Да, удалить</button>
+                <a href="/catalog/" class="btn">Отмена</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+</body>
+</html>

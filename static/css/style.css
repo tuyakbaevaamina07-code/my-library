@@ -1,0 +1,336 @@
+:root {
+    --dark-green: #0A3323;
+    --moss-green: #839958;
+    --beige: #F7F4D5;
+    --rosy-brown: #D3968C;
+    --midnight-green: #105666;
+    --white: #ffffff;
+    --shadow: 0 8px 20px rgba(0,0,0,0.05);
+    --shadow-hover: 0 12px 28px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background-color: var(--beige);
+    color: var(--dark-green);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Шапка */
+header {
+    background: var(--dark-green);
+    color: var(--beige);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+}
+
+.header-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--beige);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--beige);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+.user-links a {
+    color: var(--beige);
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.user-links a:hover {
+    text-decoration: underline;
+}
+
+/* Основной контент */
+main {
+    flex: 1;
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+/* Секции */
+section {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    background: var(--midnight-green);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--midnight-green);
+    color: var(--midnight-green);
+}
+
+.btn-outline:hover {
+    background: var(--midnight-green);
+    color: white;
+}
+
+/* Карточки книг */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+.book-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.book-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+    color: var(--dark-green);
+}
+
+.book-card .author {
+    color: var(--moss-green);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+
+.book-card .description {
+    font-size: 0.85rem;
+    color: #4a5b4a;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.card-actions .btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+}
+
+/* Герой на главной */
+.hero {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-green);
+}
+
+.hero .accent {
+    color: var(--moss-green);
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #5a6b5a;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Поиск */
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--moss-green);
+}
+
+/* Заголовки */
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--dark-green);
+}
+
+/* Счётчик */
+.count-badge {
+    color: var(--midnight-green);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Формы */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--moss-green);
+}
+
+/* Футер */
+footer {
+    background: var(--dark-green);
+    color: var(--beige);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--beige);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav ul {
+        justify-content: center;
+        gap: 1rem;
+    }
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    section, .hero {
+        padding: 1.5rem;
+    }
+    main {
+        padding: 0 1rem;
+    }
+}
+
+/* Анимация карточек */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book-card {
+    animation: fadeUp 0.3s ease forwards;
+}

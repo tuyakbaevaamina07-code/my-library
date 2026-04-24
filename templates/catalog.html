@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог | Библиотека</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">📖 <span>Библиотека</span></a>
+            <nav>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/catalog/">Каталог</a></li>
+                    <li><a href="/about/">О проекте</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="user-links">
+                {% if user.is_authenticated %}
+                    <span>{{ user.username }}</span>
+                    <a href="/accounts/logout/">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/">Войти</a>
+                    <a href="/register/">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-header">
+            <h2>📚 Каталог</h2>
+            {% if user.is_superuser %}
+                <a href="/book/create/" class="btn btn-outline">+ Новая книга</a>
+            {% endif %}
+        </div>
+
+        <!-- Поиск -->
+        <form method="get" class="search-form">
+            <input type="text" name="q" value="{{ query }}" placeholder="Поиск по названию или автору..." class="search-input">
+            <button type="submit" class="btn btn-primary">Найти</button>
+            {% if query %}
+                <a href="/catalog/" class="btn btn-outline">Сбросить</a>
+            {% endif %}
+        </form>
+
+        <!-- Счётчик с анимацией -->
+        <p class="count-badge">📚 <span id="bookCount">{{ books.count }}</span> книг</p>
+
+        <div class="books-grid">
+            {% for book in books %}
+            <div class="book-card">
+                <h3>{{ book.title }}</h3>
+                <div class="author">{{ book.author }}</div>
+                <p class="description">{{ book.description|truncatewords:18 }}</p>
+                <div class="card-actions">
+                    <a href="/book/{{ book.id }}/" class="btn btn-outline">Подробнее</a>
+                    <button class="btn btn-primary book-btn" data-book="{{ book.title }}">Забронировать</button>
+                    {% if user.is_superuser %}
+                        <a href="/book/{{ book.id }}/edit/" class="btn btn-outline">Ред.</a>
+                        <a href="/book/{{ book.id }}/delete/" class="btn btn-outline" style="border-color: var(--neon);">Уд.</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+                <p style="color: var(--text-muted); text-align: center; padding: 3rem;">😔 Книг по вашему запросу не найдено</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Главная</a>
+            <a href="/catalog/">Каталог</a>
+            <a href="/about/">О проекте</a>
+            <a href="/contacts/">Контакты</a>
+        </div>
+        <p>Книги — это свобода</p>
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

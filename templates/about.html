@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека | О проекте</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Онлайн-библиотека</h1>
+            <div>
+                {% if user.is_authenticated %}
+                    <span>Привет, {{ user.username }}!</span>
+                    <a href="/accounts/logout/" style="color: #F7F4D5; margin-left: 1rem;">Выйти</a>
+                {% else %}
+                    <a href="/accounts/login/" style="color: #F7F4D5;">Войти</a>
+                    <a href="/register/" style="color: #F7F4D5; margin-left: 1rem;">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog/">Каталог</a></li>
+                <li><a href="/about/">О проекте</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>О нашем проекте</h2>
+            <p>Этот сайт создан в рамках обучения веб-разработке. Мы реализуем онлайн-библиотеку с системой выдачи книг.</p>
+            <p>Наша цель — показать, как работают современные веб-технологии: от HTML до Django.</p>
+            <p>Все книги представлены только для ознакомления. Если вам понравилось произведение, поддержите автора, купив бумажную книгу.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Онлайн-библиотека. Все права защищены.</p>
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
